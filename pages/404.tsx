@@ -1,12 +1,9 @@
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
-import Container from '../components/container';
-import Header from '../components/header';
-import Hero from '../components/hero';
-import HeroPost from '../components/hero-post';
 import PostList from '../components/post-list';
 import Layout from '../components/layout';
+import SectionSeparator from '../components/section-separator';
 
 import Post from '../types/post';
 
@@ -33,22 +30,35 @@ export const getStaticProps = async ({ locale }: StaticProps) => {
   return { props: { allPosts } };
 }
 
-const Blog = ({ allPosts }: Props) => {
+const Page404 = ({ allPosts }: Props) => {
   const { t } = useTranslation();
 
   return (
     <>
       <Head>
-        <title>Emanuel Casco | Blog</title>
+        <title>Emanuel Casco | 404</title>
       </Head>
       <Layout>
-        <h2 className="my-10 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
-          {t('My Blog')}.
-        </h2>
+        <div className="grid lg:grid-cols-2 gap-1 p-10">
+          <div>
+            <img className="xs:w-3/6 sm:w-3/6 md:w-5/6 lg:w-4/6" src="/assets/logo_screaming.png" />
+          </div>
+          <div className="-mr-10">
+            <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
+              404
+              <br/>
+              {t('Not Found')}.
+            </h2>
+            <p className="text-md text-lg leading-relaxed mb-5">
+              {t('NotFoundText')}.
+            </p>
+          </div>
+        </div>
+        <SectionSeparator />
         {allPosts.length > 0 && <PostList posts={allPosts} />}
       </Layout>
     </>
   )
 }
 
-export default Blog;
+export default Page404;
