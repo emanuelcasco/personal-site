@@ -1,5 +1,4 @@
-import React, { ChangeEvent } from 'react'
-import Link from 'next/link'
+import React, { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
@@ -14,7 +13,6 @@ const LanguageSwitch = () => {
 
   const handleLocaleChange = ({ target }: ChangeEvent<{ value: string }>) => {
     i18n.changeLanguage(target.value);
-    console.log(router);
     router.push(router.route, router.asPath, { locale: target.value });
   };
 
@@ -29,7 +27,7 @@ const LanguageSwitch = () => {
           onChange={handleLocaleChange}
         >
           {
-            languages.map(([locale, flag]) => <option value={locale}>{flag}</option>)
+            languages.map(([locale, flag]) => <option key={locale} value={locale}>{flag}</option>)
           }
         </select>
       </div>

@@ -105,14 +105,17 @@ Azure will retry to process a failed function input when you pass an error with 
 
 Also, you can implement a custom [exponential backoff strategy](https://en.wikipedia.org/wiki/Exponential_backoff) to re-queue your messages after an increasing range time. This is especially useful to dispel possible inconveniences caused by high traffic.
 
-**Validate your inputs**! You can implement Object Schema Validation in your functions before processing inputs. There are great tools out there but I recommend [Joi](https://github.com/sideway/joi), the most widely adopted package for object schema validation. It has a great api and excellent documentation.
+**Validate your inputs!** You can implement [Object Schema Validation](https://json-schema.org/understanding-json-schema/reference/object.html)  in your functions before processing inputs. There are great tools out there but I recommend:
 
-**Beware of Third-Party Packages**. It’s important to be aware of the security risks, especially when it comes to dependency chains. Audit your packages, if possible implement it in your CI/CD pipeline. The `npm audit` command submits a description of the dependencies configured in your package to your default registry and asks for a report of known vulnerabilities.
+- [Joi](https://github.com/sideway/joi), the most widely adopted package for object schema validation. It has a great api and excellent documentation.
+- [Ajv](https://ajv.js.org/).
 
 Meet the **Meet the Dead Letter Queue (DLQ)**. Azure Service Bus stores messages in the queues until processed, but there are several reasons for such undelivered messages, like exceeding MaxDeliveryCount, exceeding TimeToLive, errors while processing subscription rules, etc.
 What happens with undelivered messages? They are sent to an DLQ.
 
-If you want to access the undelivered message from the Topic then, the syntax of reading the Dead Letter Queue will be: `TopicName/Subscriptions/SubscriptionName/$DeadLetterQueue`
+If you want to access the undelivered message from the Topic then, the syntax of reading the Dead Letter Queue will be:
+
+`TopicName/Subscriptions/SubscriptionName/$DeadLetterQueue`
 
 ## Avoid code pollution
 

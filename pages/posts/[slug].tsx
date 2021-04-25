@@ -72,34 +72,32 @@ const Post = ({ post, preview }: Props) => {
   }
 
   return (
-    <Layout preview={preview}>
-      <Container>
-        <Header />
+    <>
+      <Head>
+        <title>
+          Emanuel Casco | {post.title}
+        </title>
+        <meta property="og:image" content={post.ogImage.url} />
+      </Head>
+      <Layout preview={preview}>
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
-          <>
-            <article className="mb-32">
-              <Head>
-                <title>
-                  Emanuel Casco | {post.title}
-                </title>
-                <meta property="og:image" content={post.ogImage.url} />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                excerpt={post.excerpt}
-                readTime={post.readTime}
-              />
-              <PostBody content={post.content} />
-              <PostAuthor />
-            </article>
-          </>
+          <article className="mb-32">
+            <PostHeader
+              title={post.title}
+              coverImage={post.coverImage}
+              date={post.date}
+              excerpt={post.excerpt}
+              readTime={post.readTime}
+            />
+            <PostBody content={post.content} />
+            <PostAuthor />
+          </article>
         )}
-      </Container>
-    </Layout>
+      </Layout>
+    </>
+
   )
 };
 

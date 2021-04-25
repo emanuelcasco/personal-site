@@ -10,7 +10,7 @@ ogImage:
   url: '/assets/blog/improve-your-azure-functions-with-this-best-practices/cover.jpg'
 ---
 
-## Introduction
+## Introducción
 
 Este artículo present una **colección de buenas practicas para trabajar con [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) en Node.js**. Las recomendaciones fueron extraídas y adaptadas, en su mayoría, de la propia documentación de Azure y experiencias personales.
 
@@ -82,7 +82,7 @@ module.exports = function (ctx, input) { ... };
 
 Links útiles:
 
-- [Manage connections in Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections).
+- [Manejar conexiones en Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections).
 
 ## Mantener puras las funciones.
 
@@ -94,35 +94,34 @@ Una función pura tiene dos características principales:
 
 ## Usar un orquestador de infraestructura
 
-**Serverless still requires infrastructure management**. Managing serverless infrastructure requires discipline to ensure it can be effectively maintained.
+**Una arquitectura Serverless también necesita que se administre infraestructura**. Si bien no trabajamos directamente con lso servidores, si es necesario administrar nuestra red de funciones. Esta tarea puede volverse complicada a medida que nuestro sistema crece, por lo tanto es aconsejable apoyarse en una herramienta que nos facilite la tarea.
 
-To manage your infrastructure, and keep it documented, it is recommended to use an infrastructure orchestrator. Infrastructure as code is a way of managing your devices and servers. This is done through machine-readable definition files.
-Basically, you write down how you want your infrastructure to look like and what code should be run on that infrastructure. A highly recommended tool is [Terraform](https://www.terraform.io/).
+Para manejar esta infraestructura, y mantenerla documentada, es recomendable utilizar un **orquestador de infraestructura**. La "Infraestructura como código" ("Infrastructure as code") es una manera de manejar tus servicios en la nube a travez de archivos de texto. Basicamente, posibilitan que escribamos que necesitamos de infraestructura y lo trasladan a la nube de forma declarativa.
 
-## Write defensive functions
+Hay varias herramientas disponibles, pero yo recomiendo [Terraform](https://www.terraform.io/).
 
-**Assume your functions could throw an exception at any time**. They should be able to continue from a previous fail point in the next execution. If you are using a queue to communicate, consider a re-queue strategy in order to not lose information.
+## Escribir funciones defensivas
 
-Azure will retry to process a failed function input when you pass an error with the `context.done` method. Retries number and time window between them are defined in your `host.js` file.
+**Asume que tus funciones podrían lanzar una excepción en cualquier momento**, por lo tanto, deben ser capaces de recomponerse ante un eventual fallo. Si estás utilizando una cola de mensajes, considera re-encolar los mensajes fallidos para no perder información. Azure re-procesará un mensaje fallido cuándo la función `context.done` es invocada pasando un valor como parámetro. El número de reintentos y el tiempo entre cada ejecucuión puede ser definido en el archivo `host.js`.
 
-Also, you can implement a custom [exponential backoff strategy](https://en.wikipedia.org/wiki/Exponential_backoff) to re-queue your messages after an increasing range time. This is especially useful to dispel possible inconveniences caused by high traffic.
+También es una buena idea implementar una [estrategía de backoff incremental](https://en.wikipedia.org/wiki/Exponential_backoff) para re-encolar los mensajes luego de una ventana de tiempo incremental. Esto es especialmente útil para evitar que se acumulen errores debido a un servicio externo que está caído o funcionando incorrectamente, por ejemplo.
 
-**Validate your inputs**! You can implement Object Schema Validation in your functions before processing inputs. There are great tools out there but I recommend [Joi](https://github.com/sideway/joi), the most widely adopted package for object schema validation. It has a great api and excellent documentation.
+**¡Valida las entradas de tus funciones!** Puedes implementar [Object Schema Validation](https://json-schema.org/understanding-json-schema/reference/object.html) al inicio de tus funciones. Hay muchas herramientas que hacen esto, en particular puedo recomendar:
 
-**Beware of Third-Party Packages**. It’s important to be aware of the security risks, especially when it comes to dependency chains. Audit your packages, if possible implement it in your CI/CD pipeline. The `npm audit` command submits a description of the dependencies configured in your package to your default registry and asks for a report of known vulnerabilities.
+- [Joi](https://github.com/sideway/joi).
+- [Ajv](https://ajv.js.org/).
 
-Meet the **Meet the Dead Letter Queue (DLQ)**. Azure Service Bus stores messages in the queues until processed, but there are several reasons for such undelivered messages, like exceeding MaxDeliveryCount, exceeding TimeToLive, errors while processing subscription rules, etc.
-What happens with undelivered messages? They are sent to an DLQ.
+**Conoce la Dead Letter Queue (DLQ)**. Azure Service Bus almacena los mensajes en colas hasta que son procesados, pero en caso de que algunos de estos mensajes no puedan ser recibidos por su respectivo subscriptor entonces estos son enviados a la DLQ correspondiente al Topic. La sintaxis a utilizar para acceder a la DLQ de un Topic particular es la siguiente:
 
-If you want to access the undelivered message from the Topic then, the syntax of reading the Dead Letter Queue will be: `TopicName/Subscriptions/SubscriptionName/$DeadLetterQueue`
+`TopicName/Subscriptions/SubscriptionName/$DeadLetterQueue`
 
-## Avoid code pollution
+## Evitar que tus funciones se llenen de polución
 
-Serverless architectures biggest benefit is you can focus on implement your business logic. Problems begin when you have to **deal with common technical concerns outside your business logic**. For example: input parsing and validation, output serialization, error handling, and more.
+Una de las grandes ventajas de las arquitecturas serverless es que podemos enfocarnos en la lógica de negocio de nuestra solución. Pero, los problemas comienzan cuando debemos lidiar con atributos del código fuera del mismo, como por ejemplo: parseo de entradas, validaciones, serialización, manejo de errores, etc.
 
-All this necessary code ends up polluting your business logic, making it harder to read and maintain. [Azure Middleware Engine](https://www.npmjs.com/package/azure-middleware) helps developers to **divide the problem in smaller pieces**, isolating logic into “steps”, keeping your code clean, readable and easy to maintain.
+Todo este código auxiliar, pero necesario, puede terminar ensuciando nuestra lógica de negocio, volviendola díficil de leer y de mantener. Para estos casos, [Azure Middleware Engine](https://www.npmjs.com/package/azure-middleware) ayuda a los desarrolaldores a **dividir el problema en partes más pequeñas**, isolando la lógica en "pasos" y manteniendo tú código limpio, declarativo y fácil de leer.
 
-Example:
+Por ejemplo:
 
 ```js
 const ChainedFunction = new MiddlewareHandler()

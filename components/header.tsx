@@ -6,7 +6,7 @@ import LanguageSwitch from './language-switch';
 export default function Header() {
   const { t } = useTranslation();
   return (
-    <header className="body-font mx-10">
+    <header className="body-font mx-10 sm:mb-5 md:mb-20">
       <div className="mx-auto flex flex-wrap py-5 flex-col md:flex-row items-center">
         <Link as="/" href="/">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 hover:text-blue-700">
@@ -18,11 +18,14 @@ export default function Header() {
           <a className="hidden md:block hover:text-black">{t('Software Developer')}</a>
         </div>
         <nav className="md:ml-auto flex flex-wrap items-center justify-center text-gray-500">
-          <Link href="/#About">
-            <a className="mr-5 hover:text-gray-900">About</a>
+          <Link href="/">
+            <a className="mr-5 hover:text-gray-900">{t('HeaderHome')}</a>
           </Link>
-          <Link href="/#Blog">
-            <a className="mr-5 hover:text-gray-900">Blog</a>
+          <Link href="/blog">
+            <a className="mr-5 hover:text-gray-900">{t('HeaderBlog')}</a>
+          </Link>
+          <Link href="/about">
+            <a className="mr-5 hover:text-gray-900">{t('HeaderAbout')}</a>
           </Link>
           <LanguageSwitch />
         </nav>

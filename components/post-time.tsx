@@ -10,5 +10,5 @@ export const PostTimeData = ({
 }: Pick<IPost, 'date' | 'readTime'>) => {
   const { t } = useTranslation();
   const { locale } = useRouter();
-  return <p><DateFormatter locale={locale} dateString={date} /> · {readTime} {t('min read')}</p>;
+  return <><DateFormatter locale={locale} dateString={date} /> · {readTime} {t('min read')}</>;
 };

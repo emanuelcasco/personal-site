@@ -7,6 +7,8 @@
 .markdown ol,
 .markdown blockquote {
   @apply my-6;
+  text-align: justify;
+overflow-wrap: anywhere;
 }
 
 .markdown h2 {
