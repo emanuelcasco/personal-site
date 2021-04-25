@@ -1,0 +1,44 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
+body {
+  background-color: #fafafa;
+}
+
+#triangle-topleft {
+  width: 0;
+  height: 0;
+  border-top: 100px solid #ec2779;
+  border-right: 100px solid transparent;
+}
+
+.hero__background {
+  background-color: rgba(255, 255, 255, 1);
+  background-image: radial-gradient(rgb(29, 78, 216, 0.75) 2px, #fafafa 1px);
+  background-size: 20px 20px;
+}
+
+.hero__background-2 {
+  background-color: rgba(255, 255, 255, 1);
+  background-image:  radial-gradient(#EC2779 1px, transparent 1px), radial-gradient(#EC2779 1px, rgba(255, 255, 255, 1) 1px);
+  background-size: 40px 40px;
+  background-position: 0 0,20px 20px;
+}
+
+.dropdown:focus-within .dropdown-menu {
+  opacity:1;
+  transform: translate(0) scale(1);
+  visibility: visible;
+}
