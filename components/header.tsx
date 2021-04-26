@@ -6,7 +6,7 @@ import LanguageSwitch from './language-switch';
 export default function Header() {
   const { t } = useTranslation();
   return (
-    <header className="body-font mx-10 sm:mb-5 md:mb-20">
+    <header className="body-font mx-10 mb-5">
       <div className="mx-auto flex flex-wrap py-5 flex-col md:flex-row items-center">
         <Link as="/" href="/">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 hover:text-blue-700">

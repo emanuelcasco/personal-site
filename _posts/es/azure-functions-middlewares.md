@@ -1,13 +1,13 @@
 ---
 title: 'Implementando middlewares en Azure Functions'
 excerpt: 'Aprendé a implementar "middlewares" en tus Azure Functions para mantener tu lógica de negocio limpia y escribir tus funciones de forma más declarativa.'
-coverImage: '/assets/blog/azure-functions-middlewares/cover.jpg'
+coverImage: '/assets/blog/azure-functions-middlewares/cover.png'
 date: '2019-01-04T00:00:00Z'
 author:
   name: Emanuel Casco
   picture: '/assets/avatar.png'
 ogImage:
-  url: '/assets/blog/azure-functions-middlewares/cover.jpg'
+  url: '/assets/blog/azure-functions-middlewares/cover.png'
 ---
 
 ## Introducción
@@ -17,6 +17,10 @@ Escribí este post para compartir mi experiencia implementando middlewares en Az
 La gran ventaja de la arquitectura serverless es que permite enfocarse en construir apps y no preocuparse por proveer o manejar servidores, permitiendo poder concentrarse solo en lo que de verdad importa para el negocio.
 
 Pero en aplicaciones reales, hay que lidiar con asuntos técnicos que escapan de la lógica de negocio, cómo validaciones, parseo de entradas, serialización, manejo de errores, etc. Todo este código auxiliar suele terminar ensuciando nuestra lógica, volviendo nuestras funciones más difíciles de leer y mantener.
+
+:::info Info
+Publique este post originalmente en Medium, puedes encontrarlo en el siguiente link: [Implement middleware pattern in Azure Functions](https://javascript.plainenglish.io/implement-middleware-pattern-in-azure-functions-d8e9f94626a5)
+:::
 
 ## Solución
 
@@ -96,7 +100,6 @@ module.exports = new MiddlewareHandler()
 Este paquete sigue en desarrollo y tengo algunas ideas para mejorarlo. Sin embargo, si tienes alguna sugerencia por favor no dudes en ponerte en contacto conmigo y hacérmelo saber.
 
 Links:
-- Publique este post originalmente en Medium, puedes encontrarlo en el siguiente link: [Implement middleware pattern in Azure Functions](https://javascript.plainenglish.io/implement-middleware-pattern-in-azure-functions-d8e9f94626a5).
 - [Azure Functions Middleware](https://www.npmjs.com/package/azure-middleware).
 
 ¡Gracias por leer hasta aquí!

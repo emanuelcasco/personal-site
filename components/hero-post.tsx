@@ -9,26 +9,24 @@ import IPost from '../types/post';
 const HeroPost = (post: Omit<IPost, 'author' | 'ogImage' | 'content'>) => {
   const { t } = useTranslation();
   return (
-    <section>
-      <div className="mb-5">
-        <CoverImage title={post.title} src={post.coverImage} slug={post.slug} />
-      </div>
-      <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
-        <div>
-          <h3 className="mb-5 text-4xl lg:text-6xl leading-tight font-semibold">
-            <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
-              <a className="hover:underline">{post.title}</a>
-            </Link>
-          </h3>
-          <div className="mb-5 md:mb-0 text-lg">
+    <section className="py-10 lg:flex lg:justify-between">
+      <div className="lg:flex">
+        <div className="mb-3 lg:w-1/2">
+          <CoverImage title={post.title} src={post.coverImage} slug={post.slug} />
+        </div>
+        <div className="w-full lg:pl-10 lg:w-1/2">
+          <div className="mb-5">
             <p className="tracking-widest text-sm title-font text-gray-400 mb-1">
               <PostTimeData date={post.date} readTime={post.readTime} />
             </p>
+            <h3 className="mb-3 text-2xl lg:text-3xl leading-tight font-semibold">
+              <Link as={`/blog/${post.slug}`} href="/blog/[slug]">
+                <a className="hover:underline">{post.title}</a>
+              </Link>
+            </h3>
+            <p className="mt-4 text-gray-600 dark:text-gray-400 text-justify">{post.excerpt}</p>
           </div>
-        </div>
-        <div>
-          <p className="mb-5 text-lg leading-relaxed overflow-clip">{post.excerpt}</p>
-          <Button as={`/posts/${post.slug}`} href="/posts/[slug]" text={t('Read More')} />
+          <Button as={`/blog/${post.slug}`} href="/blog/[slug]" text={t('Read More')} />
         </div>
       </div>
     </section>

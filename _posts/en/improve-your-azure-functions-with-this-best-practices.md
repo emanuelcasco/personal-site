@@ -16,6 +16,10 @@ This article presents a **collection of good practices working with [Azure Funct
 
 Although this post will focus on Node.js, good practices presented on it can be useful for any language.
 
+:::info Info
+This post was originally published on Medium, you can find it here: [Improve your Azure Functions with this best practices](https://medium.com/@emanuelcasco/improve-your-azure-functions-with-this-best-practices-da8fd0123318).
+:::
+
 ## TL;DR
 
 - Avoid long running functions.
@@ -123,6 +127,11 @@ Serverless architectures biggest benefit is you can focus on implement your busi
 
 All this necessary code ends up polluting your business logic, making it harder to read and maintain. [Azure Middleware Engine](https://www.npmjs.com/package/azure-middleware) helps developers to **divide the problem in smaller pieces**, isolating logic into “steps”, keeping your code clean, readable and easy to maintain.
 
+:::tip Tip
+I write a post about this tool, you can find it here: [Improve your Azure Functions with this best practices](/en/blog/azure-functions-middlewares).
+:::
+
+
 Example:
 
 ```js
@@ -150,8 +159,8 @@ module.exports = ChainedFunction.listen();
 
 So, we conclude here. This good practices helped me and my team improve productivity, code quality and functions performance. I hope them benefit you and your team also. Let me know if it were useful to you, and if not you can share your experience with us in the comments.
 
-Links:
-- I published this post originally on Medium, you can find it here: [Improve your Azure Functions with this best practices](https://medium.com/@emanuelcasco/improve-your-azure-functions-with-this-best-practices-da8fd0123318).
+Useful links:
+
 - [Azure Functions Middleware](https://www.npmjs.com/package/azure-middleware).
 
 Thanks for reading!

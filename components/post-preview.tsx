@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { PostTimeData } from './post-time';
 
@@ -10,11 +9,9 @@ type Props = {
   post: IPost
 }
 const PostPreview = ({ post }: Props) => {
-  const { locale } = useRouter();
-
   return (
     <div className="p-5 md:w-1/2 lg:w-1/3">
-      <Link as={`/posts/${post.slug}`} href="/posts/[slug]">
+      <Link as={`/blog/${post.slug}`} href="/blog/[slug]">
         <div className="cursor-pointer h-full overflow-hidden">
           <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={post.coverImage} alt="blog" />
           <div className="py-6">

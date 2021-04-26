@@ -1,13 +1,13 @@
 ---
 title: 'Implement middleware pattern in Azure Functions'
 excerpt: 'Learn to implement the "middleware" pattern in "Azure Function" to keep your business logic clean and write your functions in a more declarative way.'
-coverImage: '/assets/blog/azure-functions-middlewares/cover.jpg'
+coverImage: '/assets/blog/azure-functions-middlewares/cover.png'
 date: '2019-01-04T00:00:00Z'
 author:
   name: Emanuel Casco
   picture: '/assets/avatar.png'
 ogImage:
-  url: '/assets/blog/azure-functions-middlewares/cover.jpg'
+  url: '/assets/blog/azure-functions-middlewares/cover.png'
 ---
 
 ## Introduction
@@ -18,6 +18,9 @@ Biggest advantage of serverless computing is that you can focus on building apps
 
 But in real world applications you have to deal with some common technical concerns outside business logic, like input parsing and validation, output serialization, error handling, and more. All this necessary code ends up polluting the pure business logic code in your functions, making the code harder to read and to maintain.
 
+:::info Info
+I published this post originally on Medium, you can find it here: [Implement middleware pattern in Azure Functions](https://javascript.plainenglish.io/implement-middleware-pattern-in-azure-functions-d8e9f94626a5).
+:::
 
 ## Implementation
 
@@ -100,7 +103,6 @@ module.exports = new MiddlewareHandler()
 The package is still in development and I have some ideas to improve it. However, if you have any suggestion, please don’t doubt in contact me and let me know about it!
 
 Links:
-- I published this post originally on Medium, you can find it here: [Implement middleware pattern in Azure Functions](https://javascript.plainenglish.io/implement-middleware-pattern-in-azure-functions-d8e9f94626a5).
 - [Azure Functions Middleware](https://www.npmjs.com/package/azure-middleware).
 
 Thanks for reading!
