@@ -10,7 +10,7 @@ export const enTranslations = {
     "Read More": "Read More",
     "More Posts": "More Posts",
     "Not Found": "Page Not Found",
-    "NotFoundText": "",
+    "NotFoundText": "We're sorry for the inconvinience but apparently the page you request does not exist or isn't available now. But there is a lot of content in this web! Below you will find a list with some blog posts...",
   },
 };
 
@@ -26,6 +26,6 @@ export const esTranslations = {
     "Read More": "Leer Más",
     "More Posts": "Otros Posts",
     "Not Found": "Página No Encontrada",
-    "NotFoundText": "Lamentamos los inconvenientes, pero al parecer la página que solicito no existe o no se encuentra disponible por el momento. Sin embargo, ¡hay mucho contenido para ver en esta web! Debajo puede encontrar un listado de posts se mi blog que seguramente pueden interesarte.",
+    "NotFoundText": "Lamentamos los inconvenientes pero al parecer la página que solicito no existe o no se encuentra disponible por el momento. Sin embargo, ¡hay mucho contenido para ver en esta web! Debajo hay un listado de posts de mi blog...",
   },
 };

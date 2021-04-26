@@ -10,8 +10,8 @@ type Props = {
 const MorePosts = ({ posts }: Props) => {
   return (
     <section className="body-font">
-        <div className="py-10 mx-auto">
-          <div className="flex flex-wrap -m-4">
+        <div className="mx-auto">
+          <div className="flex flex-wrap -m-5">
             {posts.map((post) => (
               <PostPreview key={post.slug} post={post} />
             ))}
