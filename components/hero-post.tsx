@@ -11,22 +11,27 @@ const HeroPost = (post: Omit<IPost, 'author' | 'ogImage' | 'content'>) => {
   return (
     <section className="py-10 lg:flex lg:justify-between">
       <div className="lg:flex">
-        <div className="mb-3 lg:w-1/2">
+        <div className="relative mb-3 lg:w-1/2">
+          <div className="ribbon text-2xl whitespace-no-wrap px-4">🔥</div>
           <CoverImage title={post.title} src={post.coverImage} slug={post.slug} />
         </div>
-        <div className="w-full lg:pl-10 lg:w-1/2">
-          <div className="mb-5">
-            <p className="tracking-widest text-sm title-font text-gray-400 mb-1">
+        <div className="md:flex lg:flex-col lg:pl-10 lg:w-1/2">
+          <div className="sm:p1">
+            <p className="text-sm title-font text-gray-400 mb-1">
               <PostTimeData date={post.date} readTime={post.readTime} />
             </p>
-            <h3 className="mb-3 text-2xl lg:text-3xl leading-tight font-semibold">
+            <h3 className="mb-3 text-2xl lg:text-3xl font-semibold">
               <Link as={`/blog/${post.slug}`} href="/blog/[slug]">
                 <a className="hover:underline">{post.title}</a>
               </Link>
             </h3>
-            <p className="mt-4 text-gray-600 dark:text-gray-400 text-justify">{post.excerpt}</p>
           </div>
-          <Button as={`/blog/${post.slug}`} href="/blog/[slug]" text={t('Read More')} />
+          <div className="sm:p1 lg:w-full sm:w-full md:w-1/2">
+            <p className="mb-5 text-gray-600 dark:text-gray-400 text-justify">{post.excerpt}</p>
+            <div className="hidden lg:block">
+              <Button as={`/blog/${post.slug}`} href="/blog/[slug]" text={t('Read More')} />
+            </div>
+          </div>
         </div>
       </div>
     </section>

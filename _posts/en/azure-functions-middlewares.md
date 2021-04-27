@@ -8,6 +8,7 @@ author:
   picture: '/assets/avatar.png'
 ogImage:
   url: '/assets/blog/azure-functions-middlewares/cover.png'
+tags: [backend, serverless, azure functions, nodejs, javascript]
 ---
 
 ## Introduction
@@ -104,9 +105,3 @@ The package is still in development and I have some ideas to improve it. However
 
 Links:
 - [Azure Functions Middleware](https://www.npmjs.com/package/azure-middleware).
-
-Thanks for reading!
-
----
-
-You can follow me on [Twitter](https://twitter.com/Emanuel_Casco), [GitHub](https://github.com/emanuelcasco) or [LinkedIn](https://www.linkedin.com/in/emanuelcasco/).

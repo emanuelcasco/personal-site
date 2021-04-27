@@ -8,6 +8,7 @@ author:
   picture: '/assets/avatar.png'
 ogImage:
   url: '/assets/blog/improve-your-azure-functions-with-this-best-practices/cover.jpg'
+tags: [backend, serverless, azure functions, nodejs, javascript]
 ---
 
 ## Introduction
@@ -162,9 +163,3 @@ So, we conclude here. This good practices helped me and my team improve producti
 Useful links:
 
 - [Azure Functions Middleware](https://www.npmjs.com/package/azure-middleware).
-
-Thanks for reading!
-
----
-
-You can follow me on [Twitter](https://twitter.com/Emanuel_Casco), [GitHub](https://github.com/emanuelcasco) or [LinkedIn](https://www.linkedin.com/in/emanuelcasco/).

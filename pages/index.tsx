@@ -44,7 +44,7 @@ const Index = ({ allPosts }: Props) => {
       </Head>
       <Layout>
         <Hero />
-        <h2 className="mb-8 text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
+        <h2 className="text-6xl md:text-6xl font-bold tracking-tighter leading-tight">
           {t('My Blog')}.
         </h2>
         {heroPost && (

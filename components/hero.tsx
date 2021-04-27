@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useInterval } from '../hooks';
 import { takeSingleRandom } from '../utils';
+import SocialLinks from './social-links';
 
 const COOL_WORDS_LIST =
   'Developer, Software Developer,Geek,Software Architect,Frontend Developer,Backend Developer,Tech Lead,Software Architect,Lead Developer,Tester,Analyst,Writer,Blogger,Node.js Lover'
@@ -28,7 +29,7 @@ function Hero() {
   return (
     <>
       <div className="-z-1 absolute inset-x-2/3 top-24 w-1/3 h-5/6 hero__background"></div>
-      <div className="relative pb-20 px-5 xl:px-0 mx-auto grid lg:grid-cols-1 xl:grid-cols-2 xl:my-20 gap-8">
+      <div className="relative pb-32 px-5 xl:px-0 mx-auto grid lg:grid-cols-1 xl:grid-cols-2 xl:my-20 gap-8">
         <div className="flex flex-col">
           <div className="inline-flex items-center justify-center">
             <img src="/assets/avatar_photo.png" className="w-60 h-60 rounded-full mr-4" alt="avatar" />
@@ -37,7 +38,10 @@ function Hero() {
             <h2 className="pt-10 text-4xl w-full xl:w-full xl:text-5xl font-black f-f-l">
               👋 {t('Hey')}<br />Emanuel Casco
             </h2>
-            <div className="f-f-r py-10 sm:pb-0">
+            <div className="py-10 text-gray-900">
+              <SocialLinks />
+            </div>
+            <div className="f-f-r sm:pb-0">
               <h3 className="text-2xl">
                 <p className="inline pr-2">{selectedRoleEmoji}</p>
                 <p className={`bg-black inline text-white p-1`}>{selectedRoleWord}</p>.
