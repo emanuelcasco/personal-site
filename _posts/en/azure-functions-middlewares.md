@@ -3,11 +3,6 @@ title: 'Implement middleware pattern in Azure Functions'
 excerpt: 'Learn to implement the "middleware" pattern in "Azure Function" to keep your business logic clean and write your functions in a more declarative way.'
 coverImage: '/assets/blog/azure-functions-middlewares/cover.png'
 date: '2019-01-04T00:00:00Z'
-author:
-  name: Emanuel Casco
-  picture: '/assets/avatar.png'
-ogImage:
-  url: '/assets/blog/azure-functions-middlewares/cover.png'
 tags: [backend, serverless, azure functions, nodejs, javascript]
 ---
 

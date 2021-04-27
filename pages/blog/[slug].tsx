@@ -37,9 +37,7 @@ export async function getStaticProps({ params, locale }: StaticPropsParams) {
     'date',
     'readTime',
     'slug',
-    'author',
     'content',
-    'ogImage',
     'coverImage',
   ]);
   return {
@@ -77,7 +75,7 @@ const Post = ({ post, preview }: Props) => {
         <title>
           Emanuel Casco | {post.title}
         </title>
-        <meta property="og:image" content={post.ogImage.url} />
+        <meta property="og:image" content={post.coverImage} />
       </Head>
       <Layout preview={preview}>
         {router.isFallback ? (

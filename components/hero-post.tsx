@@ -6,7 +6,7 @@ import CoverImage from './cover-image';
 import { PostTimeData } from './post-time';
 import IPost from '../types/post';
 
-const HeroPost = (post: Omit<IPost, 'author' | 'ogImage' | 'content'>) => {
+const HeroPost = (post: Omit<IPost, 'content'>) => {
   const { t } = useTranslation();
   return (
     <section className="py-10 lg:flex lg:justify-between">

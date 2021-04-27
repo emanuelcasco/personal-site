@@ -3,11 +3,6 @@ title: 'Implementando middlewares en Azure Functions'
 excerpt: 'Aprendé a implementar "middlewares" en tus Azure Functions para mantener tu lógica de negocio limpia y escribir tus funciones de forma más declarativa.'
 coverImage: '/assets/blog/azure-functions-middlewares/cover.png'
 date: '2019-01-04T00:00:00Z'
-author:
-  name: Emanuel Casco
-  picture: '/assets/avatar.png'
-ogImage:
-  url: '/assets/blog/azure-functions-middlewares/cover.png'
 tags: [backend, serverless, azure functions, nodejs, javascript]
 ---
 

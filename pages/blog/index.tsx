@@ -26,7 +26,6 @@ export const getStaticProps = async ({ locale }: StaticProps) => {
     'date',
     'readTime',
     'slug',
-    'author',
     'coverImage',
     'excerpt',
   ], locale);

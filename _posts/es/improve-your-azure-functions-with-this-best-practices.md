@@ -3,12 +3,7 @@ title: 'Mejora tús Azure Functions con estas buenas practicas'
 excerpt: 'Trucos y tips para llevar tús Azure Functions al siguiente nivel con Node.js.'
 coverImage: '/assets/blog/improve-your-azure-functions-with-this-best-practices/cover.jpg'
 date: '2019-09-23T00:00:00Z'
-author:
-  name: Emanuel Casco
-  picture: '/assets/avatar.png'
-ogImage:
-  url: '/assets/blog/improve-your-azure-functions-with-this-best-practices/cover.jpg'
-  tags: [backend, serverless, azure functions, nodejs, javascript]
+tags: [backend, serverless, azure functions, nodejs, javascript]
 ---
 
 ## Introducción
