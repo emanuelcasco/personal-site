@@ -1,15 +1,9 @@
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
-import Container from '../../components/container';
-import Header from '../../components/header';
-import Hero from '../../components/hero';
-import HeroPost from '../../components/hero-post';
 import PostList from '../../components/post-list';
 import Layout from '../../components/layout';
-
 import Post from '../../types/post';
-
 import { getAllPosts } from '../../lib/api';
 
 type StaticProps = {
@@ -21,15 +15,7 @@ type Props = {
 }
 
 export const getStaticProps = async ({ locale }: StaticProps) => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'readTime',
-    'slug',
-    'coverImage',
-    'excerpt',
-  ], locale);
-  return { props: { allPosts } };
+  return { props: { allPosts: getAllPosts(locale) } };
 }
 
 const Blog = ({ allPosts }: Props) => {

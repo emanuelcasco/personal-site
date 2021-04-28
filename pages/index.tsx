@@ -19,14 +19,7 @@ type Props = {
 }
 
 export const getStaticProps = async ({ locale }: StaticProps) => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'readTime',
-    'slug',
-    'coverImage',
-    'excerpt',
-  ], locale);
+  const allPosts = getAllPosts(locale);
   return { props: { allPosts } };
 }
 

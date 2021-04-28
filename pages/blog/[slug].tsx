@@ -9,7 +9,7 @@ import Layout from '../../components/layout'
 import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
-import markdownToHtml from '../../lib/markdownToHtml'
+import markdownToHtml from '../../lib/markdown-parser'
 import PostType from '../../types/post'
 
 type Props = {
@@ -31,15 +31,7 @@ type StaticPathsParams = {
 
 
 export async function getStaticProps({ params, locale }: StaticPropsParams) {
-  const post = getPostBySlug(params.slug, locale, [
-    'title',
-    'excerpt',
-    'date',
-    'readTime',
-    'slug',
-    'content',
-    'coverImage',
-  ]);
+  const post = getPostBySlug(params.slug, locale);
   return {
     props: {
       post: { ...post, content: await markdownToHtml(post.content || '') }
@@ -48,10 +40,10 @@ export async function getStaticProps({ params, locale }: StaticPropsParams) {
 }
 
 export async function getStaticPaths({ locales }: StaticPathsParams) {
-  const posts = getAllPosts(['slug']);
   let paths: any[] = []
 
   for (const locale of locales) {
+    const posts = getAllPosts(locale);
     paths = paths.concat(posts.map(post => ({
       params: { slug: post.slug }, locale
     })));

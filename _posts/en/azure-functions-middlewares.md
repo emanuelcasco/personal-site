@@ -20,7 +20,7 @@ I published this post originally on Medium, you can find it here: [Implement mid
 
 ## Implementation
 
-Web frameworks, like Express, Fastify or Hapi, has solved this problem using the middleware pattern. This pattern allows developers to isolate these common technical concerns into “steps” that decorate the main business logic code.
+Web frameworks, like Express, Fastify or Hapi, has solved this problem using the middleware pattern. This pattern allows developers to isolate these common technical concerns into "steps" that decorate the main business logic code.
 
 After deciding to implement this pattern in my project, I made a small search to check if someone had already implemented a similar solution.
 Unfortunately, the few solutions I found didn‘t meet my needs, so I decided to implement it myself.
@@ -51,7 +51,7 @@ module.exports = new MiddlewareHandler()
 
 ### Function chaining
 
-The `use` method is used to chain different function handlers, or middlewares, as “steps”. It expect a function handler as argument.
+The `use` method is used to chain different function handlers, or middlewares, as "steps". It expect a function handler as argument.
 Each middleware is executed sequentially in the order in which the function was defined. Information flow passes to the next element of the chain when calling `context.next`.
 
 ```js
