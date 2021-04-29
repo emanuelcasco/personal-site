@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { join } from 'path';
 import matter from 'gray-matter';
-import markdownReadingTime from './markdown-reading-time';
+import { calculateReadingTime } from 'markdown-reading-time';
 
 const MARKDOWN_EXTENSION = '.md'
 const POSTS_DIRECTORY = join(process.cwd(), '_posts');
@@ -18,7 +18,7 @@ export const getPostBySlug = (slug: string, locale: string) => {
   return {
     slug,
     content: content,
-    readTime: markdownReadingTime(content).minutes,
+    readTime: calculateReadingTime(content).minutes,
     date: data.date,
     ...data
   };
