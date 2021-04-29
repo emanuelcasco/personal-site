@@ -4,19 +4,19 @@ import { useTranslation } from 'react-i18next';
 import PostList from '../../components/post-list';
 import Layout from '../../components/layout';
 import Post from '../../types/post';
-import { getAllPosts } from '../../lib/api';
+import { getAllPosts } from '../../lib/posts-service';
 
 type StaticProps = {
   locale: string;
-}
+};
 
 type Props = {
   allPosts: Post[];
-}
+};
 
 export const getStaticProps = async ({ locale }: StaticProps) => {
   return { props: { allPosts: getAllPosts(locale) } };
-}
+};
 
 const Blog = ({ allPosts }: Props) => {
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ const Blog = ({ allPosts }: Props) => {
         {allPosts.length > 0 && <PostList posts={allPosts} />}
       </Layout>
     </>
-  )
-}
+  );
+};
 
 export default Blog;

@@ -8,20 +8,20 @@ import Layout from '../components/layout';
 
 import Post from '../types/post';
 
-import { getAllPosts } from '../lib/api';
+import { getAllPosts } from '../lib/posts-service';
 
 type StaticProps = {
   locale: string;
-}
+};
 
 type Props = {
   allPosts: Post[];
-}
+};
 
 export const getStaticProps = async ({ locale }: StaticProps) => {
   const allPosts = getAllPosts(locale);
   return { props: { allPosts } };
-}
+};
 
 const Index = ({ allPosts }: Props) => {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ const Index = ({ allPosts }: Props) => {
         {morePosts.length > 0 && <PostList posts={morePosts} />}
       </Layout>
     </>
-  )
-}
+  );
+};
 
 export default Index;
