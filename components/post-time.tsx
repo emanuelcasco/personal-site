@@ -1,14 +1,19 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
-import DateFormatter from './date-formatter'
+import DateFormatter from './date-formatter';
 import IPost from '../types/post';
 
 export const PostTimeData = ({
   date,
   readTime,
 }: Pick<IPost, 'date' | 'readTime'>) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('post');
   const { locale } = useRouter();
-  return <><DateFormatter locale={locale} dateString={date} /> · {readTime} {t('min read')}</>;
+  return (
+    <>
+      <DateFormatter locale={locale} dateString={date} /> · {readTime}{' '}
+      {t('readTime')}
+    </>
+  );
 };

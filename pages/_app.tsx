@@ -7,23 +7,28 @@ import * as gtag from '../lib/gtag';
 
 import 'nprogress/nprogress.css';
 import '../styles/index.css';
-import '../i18n';
+import i18n from '../i18n';
 
-//Binding events.
-Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
-Router.events.on('routeChangeError', () => NProgress.done());
+const routeChangeStart = () => NProgress.start();
+const routeChangeComplete = (url: URL) => {
+  gtag.pageview(url);
+  NProgress.done();
+};
+const routeChangeError = () => NProgress.done();
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = (url: URL) => {
-      gtag.pageview(url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
+    i18n.changeLanguage(router.locale);
+    //Binding events.
+    Router.events.on('routeChangeStart', routeChangeStart);
+    Router.events.on('routeChangeComplete', routeChangeComplete);
+    Router.events.on('routeChangeError', routeChangeError);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
+      Router.events.off('routeChangeStart', routeChangeStart);
+      Router.events.off('routeChangeComplete', routeChangeComplete);
+      Router.events.off('routeChangeError', routeChangeError);
     };
   }, [router.events]);
 
