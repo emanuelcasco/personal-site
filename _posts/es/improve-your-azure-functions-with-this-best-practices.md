@@ -1,6 +1,6 @@
 ---
 title: 'Mejora tús Azure Functions con estas buenas practicas'
-excerpt: 'Trucos y tips para llevar tús Azure Functions al siguiente nivel con Node.js.'
+excerpt: 'Tips y trucos para llevar tús Azure Functions al siguiente nivel con Node.js.'
 coverImage: '/assets/blog/improve-your-azure-functions-with-this-best-practices/cover.jpg'
 date: '2019-09-23T00:00:00Z'
 tags: [backend, serverless, azure functions, nodejs, javascript]
@@ -8,7 +8,7 @@ tags: [backend, serverless, azure functions, nodejs, javascript]
 
 ## Introducción
 
-Este artículo present una **colección de buenas practicas para trabajar con [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) en Node.js**. Las recomendaciones fueron extraídas y adaptadas, en su mayoría, de la propia documentación de Azure y experiencias personales.
+En este artículo quiero compartir una **colección de buenas practicas para trabajar con [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/) en Node.js**. Las recomendaciones fueron extraídas y adaptadas, en su mayoría, de la propia documentación de Azure y experiencias personales.
 
 Como se menciona arriba, este post se centrará en Node.js, sin embargo, las buenas practicas presentadad pueden ser útiles en cualquier lenguaje.
 
@@ -28,13 +28,13 @@ Publique este post originalmente en Medium, puedes encontrarlo en el siguiente l
 
 ## Evitar que las funciones se ejecuten por tiempo prolongado
 
-Una función puede extenderse en el tiempo debido a dependencias externas o mucho procesamiento, esto resulta en *timeouts* inesperados y procesos sin finalizar correctamente. Para prevenir esto, tener en cuenta:
+Una función puede extenderse en el tiempo debido a dependencias externas o mucho procesamiento, esto resulta en _timeouts_ inesperados y procesos sin finalizar correctamente. Para prevenir esto, tener en cuenta:
 
 - Monitorear las dependencias externas y evitar, en lo posible, aquellas que puedan hacer que nuestras funciones se extiendan en el tiempo.
 - Refactorear funciones largas en piezas más pequeñas de código que trabajen de manera conjunta y retornen respuestas rápidas.
 - Respetar el principio de única responsabilidad, cada función debería encargarse de una, y solo una, tarea.
 
-<img alt="Refactor large functions into smaller pieces of code that work together and return responses fast." src="/assets/blog/improve-your-azure-functions-with-this-best-practices/image01.png" />
+![Refactor large functions into smaller pieces of code that work together and return responses fast.](/assets/blog/improve-your-azure-functions-with-this-best-practices/image01.png)
 
 Por ejemplo, imaginemos una una función que se dispara por una llamada HTTP. Las request HTTP sueles requerir de una respuesta lo más rapida posible, por lo tanto, puede responder al cliente de inmediato que la operación se esta procesando y encolar el mensaje para ser procesado de manera asincrónica por otra función.
 
@@ -42,7 +42,7 @@ Por ejemplo, imaginemos una una función que se dispara por una llamada HTTP. La
 
 Azure Functions no fue pensado para manejar comunicación directa entre funciones, En lo posible, **utilize Azure Queue Storage para comunicar dos o más funciones**.
 
-<img alt="Prefer Azure Queue Storage for cross-function communication." src="/assets/blog/improve-your-azure-functions-with-this-best-practices/image02.png" />
+![Prefer Azure Queue Storage for cross-function communication](/assets/blog/improve-your-azure-functions-with-this-best-practices/image02.png)
 
 Si fuese necesario construir topologías más complejas también se puede utilizar [Azure Service Bus](https://azure.microsoft.com/en-us/services/service-bus/) que ayuda a enviar mensajes a multiples subscriptores y aplicar filtros. Por otro lado, [Azure Events Hubs](https://azure.microsoft.com/en-us/services/event-hubs/) es útil para soportar altos volumenes de carga.
 
@@ -62,13 +62,13 @@ module.exports = function (ctx, input) {
    const redis = new Redis(config);
    ...
 };
-   
+
 // DO ✅
 // myFunction.js
 const Redis = require('redis');
 const redis = new Redis(config); // re-utiliced by Azure
 module.exports = function (ctx, input) { ... };
-   
+
 // CONSIDER 👍
 // redisWrapper.js
 const Redis = require('redis');
@@ -87,6 +87,7 @@ Links útiles:
 ## Mantener puras las funciones.
 
 Una función pura tiene dos características principales:
+
 - **No tiene estado**, o sea, no produce efectos colaterales.
 - **Es deterministica**. Por lo tanto, dado una misma entrada siempre produce la misma salida.
 
@@ -122,7 +123,7 @@ Una de las grandes ventajas de las arquitecturas serverless es que podemos enfoc
 Todo este código auxiliar, pero necesario, puede terminar ensuciando nuestra lógica de negocio, volviendola díficil de leer y de mantener. Para estos casos, [Azure Middleware Engine](https://www.npmjs.com/package/azure-middleware) ayuda a los desarrolaldores a **dividir el problema en partes más pequeñas**, isolando la lógica en "pasos" y manteniendo tú código limpio, declarativo y fácil de leer.
 
 :::tip Tip
-Escribí un articulo sobre esta herramiente, puedes encontrarlo en el siguiente link: [Improve your Azure Functions with this best practices](/es/blog/azure-functions-middlewares).
+Escribí un articulo sobre esta herramiente, puedes encontrarlo en el siguiente link: [Implementando middlewares en Azure Functions](/es/blog/azure-functions-middlewares).
 :::
 
 Por ejemplo:
@@ -130,21 +131,20 @@ Por ejemplo:
 ```js
 const ChainedFunction = new MiddlewareHandler()
   .use((context, input) => {
-    asyncFunction(input)
-      .then(res => {
-        context.log.info('Im called first');
-        context.next();
-      });
+    asyncFunction(input).then((res) => {
+      context.log.info('Im called first');
+      context.next();
+    });
   })
-  .use(context => {
+  .use((context) => {
     context.log.info('Im called second');
     context.done(null, { status: 200 });
   })
   .catch((err, context, input) => {
     context.log.error(`Something went wrong. Error: ${err}`);
-    context.done(err, { status: 500});
+    context.done(err, { status: 500 });
   });
- 
+
 module.exports = ChainedFunction.listen();
 ```
 

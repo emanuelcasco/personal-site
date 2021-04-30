@@ -35,7 +35,7 @@ To prevent this, you can:
 - Refactor large functions into smaller pieces of code that work together and return responses fast.
 - Respect the "single responsability principle", each function should have a single responsibility over a single part of the functionality provided by the software.
 
-<img alt="Refactor large functions into smaller pieces of code that work together and return responses fast." src="/assets/blog/improve-your-azure-functions-with-this-best-practices/image01.png" />
+![Refactor large functions into smaller pieces of code that work together and return responses fast.](/assets/blog/improve-your-azure-functions-with-this-best-practices/image01.png)
 
 For example, imagine you have a HTTP trigger function. HTTP requests usually need a quick response, thus you can pass the HTTP trigger payload into a queue and process it with a queue trigger function
 
@@ -43,13 +43,14 @@ For example, imagine you have a HTTP trigger function. HTTP requests usually nee
 
 Azure Functions are not built to manage communication between functions. **Prefer Azure Queue Storage for cross-function communication**. Queue storage gives you asynchronous message queueing for communication between functions.
 
-<img alt="Prefer Azure Queue Storage for cross-function communication." src="/assets/blog/improve-your-azure-functions-with-this-best-practices/image02.png" />
+![Prefer Azure Queue Storage for cross-function communication](/assets/blog/improve-your-azure-functions-with-this-best-practices/image02.png)
 
 If you need build topologies with complex routing you can use [Service Bus](https://azure.microsoft.com/en-us/services/service-bus/) which helps you to deliver messages to multiple subscribers and filter them before processing. In the other hand, [Events Hubs](https://azure.microsoft.com/en-us/services/event-hubs/) are useful to support high volume communications.
 
 ## Share and manage connections
 
 **Creating and destroying instances of a shareable object can hurt performance.** Here are some guidelines to follow when manage connections:
+
 - Reuse client instances rather than creating new ones with each function invocation.
 - Create a singleton client and reuse it for every function invocation.
 - Maintain this singleton pure.
@@ -62,13 +63,13 @@ module.exports = function (ctx, input) {
    const redis = new Redis(config);
    ...
 };
-   
+
 // DO ✅
 // myFunction.js
 const Redis = require('redis');
 const redis = new Redis(config); // re-utiliced by Azure
 module.exports = function (ctx, input) { ... };
-   
+
 // CONSIDER 👍
 // redisWrapper.js
 const Redis = require('redis');
@@ -85,6 +86,7 @@ If you want to know more, please visit [Manage connections in Azure Functions](h
 ## Keep functions pure
 
 A pure function has two main characteristics:
+
 - Is **stateless**, produces no side effects.
 - Is **deterministic**, given the same input, will always return the same output.
 
@@ -105,7 +107,7 @@ Azure will retry to process a failed function input when you pass an error with 
 
 Also, you can implement a custom [exponential backoff strategy](https://en.wikipedia.org/wiki/Exponential_backoff) to re-queue your messages after an increasing range time. This is especially useful to dispel possible inconveniences caused by high traffic.
 
-**Validate your inputs!** You can implement [Object Schema Validation](https://json-schema.org/understanding-json-schema/reference/object.html)  in your functions before processing inputs. There are great tools out there but I recommend:
+**Validate your inputs!** You can implement [Object Schema Validation](https://json-schema.org/understanding-json-schema/reference/object.html) in your functions before processing inputs. There are great tools out there but I recommend:
 
 - [Joi](https://github.com/sideway/joi), the most widely adopted package for object schema validation. It has a great api and excellent documentation.
 - [Ajv](https://ajv.js.org/).
@@ -124,30 +126,28 @@ Serverless architectures biggest benefit is you can focus on implement your busi
 All this necessary code ends up polluting your business logic, making it harder to read and maintain. [Azure Middleware Engine](https://www.npmjs.com/package/azure-middleware) helps developers to **divide the problem in smaller pieces**, isolating logic into “steps”, keeping your code clean, readable and easy to maintain.
 
 :::tip Tip
-I write a post about this tool, you can find it here: [Improve your Azure Functions with this best practices](/en/blog/azure-functions-middlewares).
+I write a post about this tool, you can find it here: [Implement middleware pattern in Azure Functions](/en/blog/azure-functions-middlewares).
 :::
-
 
 Example:
 
 ```js
 const ChainedFunction = new MiddlewareHandler()
   .use((context, input) => {
-    asyncFunction(input)
-      .then(res => {
-        context.log.info('Im called first');
-        context.next();
-      });
+    asyncFunction(input).then((res) => {
+      context.log.info('Im called first');
+      context.next();
+    });
   })
-  .use(context => {
+  .use((context) => {
     context.log.info('Im called second');
     context.done(null, { status: 200 });
   })
   .catch((err, context, input) => {
     context.log.error(`Something went wrong. Error: ${err}`);
-    context.done(err, { status: 500});
+    context.done(err, { status: 500 });
   });
- 
+
 module.exports = ChainedFunction.listen();
 ```
 
