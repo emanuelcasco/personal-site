@@ -38,8 +38,8 @@ body {
 
 /* Your own custom utilities */
 .admonition {
-  padding:  .5rem 1rem 0rem;
-  margin:  .5rem 0;
+  padding: 0.5rem 1rem 0rem;
+  margin: 0.5rem 0;
 }
 
 /* Your own custom utilities */
@@ -65,32 +65,68 @@ body {
   stroke-width: 0;
 }
 
-.admonition-tip { border-left: 0.2rem solid #1c4ed8; }  
-.admonition-tip .admonition-heading { color: #1c4ed8; }
-.admonition-tip .admonition-icon svg { fill: #1c4ed8; }
+.admonition-tip {
+  border-left: 0.2rem solid #1c4ed8;
+}
+.admonition-tip .admonition-heading {
+  color: #1c4ed8;
+}
+.admonition-tip .admonition-icon svg {
+  fill: #1c4ed8;
+}
 
-.admonition-quote { border-left: 0.2rem solid #1c4ed8; }  
-.admonition-quote .admonition-heading { color: #1c4ed8; }
-.admonition-quote .admonition-icon svg { fill: #1c4ed8; }
+.admonition-quote {
+  border-left: 0.2rem solid #1c4ed8;
+}
+.admonition-quote .admonition-heading {
+  color: #1c4ed8;
+}
+.admonition-quote .admonition-icon svg {
+  fill: #1c4ed8;
+}
 
-.admonition-danger { border-left: 0.2rem solid #d81c61; }  
-.admonition-danger .admonition-heading { color: #d81c61; }
-.admonition-danger .admonition-icon svg { fill: #d81c61; }
+.admonition-danger {
+  border-left: 0.2rem solid #d81c61;
+}
+.admonition-danger .admonition-heading {
+  color: #d81c61;
+}
+.admonition-danger .admonition-icon svg {
+  fill: #d81c61;
+}
 
-.admonition-caution { border-left: 0.2rem solid #f9a62a; }  
-.admonition-caution .admonition-heading { color: #f9a62a; }
-.admonition-caution .admonition-icon svg { fill: #f9a62a; }
+.admonition-caution {
+  border-left: 0.2rem solid #f9a62a;
+}
+.admonition-caution .admonition-heading {
+  color: #f9a62a;
+}
+.admonition-caution .admonition-icon svg {
+  fill: #f9a62a;
+}
 
-.admonition-note { border-left: 0.2rem solid #d81ca6; }  
-.admonition-note .admonition-heading { color: #d81ca6; }
-.admonition-note .admonition-icon svg { fill: #d81ca6; }
+.admonition-note {
+  border-left: 0.2rem solid #d81ca6;
+}
+.admonition-note .admonition-heading {
+  color: #d81ca6;
+}
+.admonition-note .admonition-icon svg {
+  fill: #d81ca6;
+}
 
-.admonition-info { border-left: 0.2rem solid #707070; }  
-.admonition-info .admonition-heading { color: #707070; }
-.admonition-info .admonition-icon svg { fill: #707070; }
+.admonition-info {
+  border-left: 0.2rem solid #707070;
+}
+.admonition-info .admonition-heading {
+  color: #707070;
+}
+.admonition-info .admonition-icon svg {
+  fill: #707070;
+}
 
 .ribbon {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 2rem;
   position: absolute;
   top: 0;
