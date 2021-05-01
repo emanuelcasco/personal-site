@@ -15,6 +15,8 @@ const PostTitle = () => {
               <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                 <div className="inline-flex items-center justify-center">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src="/assets/avatar_photo.png"
                     className="w-20 h-20 rounded-full mr-4"
                     alt="avatar"

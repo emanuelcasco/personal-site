@@ -1,19 +1,21 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 type Props = {
-  title: string
-  src: string
-  slug?: string
-}
+  title: string;
+  src: string;
+  slug?: string;
+};
 
 const CoverImage = ({ title, src, slug }: Props) => {
   const image = (
     <img
       src={src}
+      loading="lazy"
+      decoding="async"
       alt={`Cover Image for ${title}`}
-      className='h-full w-full hover:shadow-medium transition-shadow duration-200'
+      className="h-full w-full hover:shadow-medium transition-shadow duration-200"
     />
-  )
+  );
   return (
     <div className="sm:mx-0">
       {slug ? (
@@ -24,7 +26,7 @@ const CoverImage = ({ title, src, slug }: Props) => {
         image
       )}
     </div>
-  )
-}
+  );
+};
 
 export default CoverImage;

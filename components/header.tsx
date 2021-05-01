@@ -11,6 +11,8 @@ export default function Header() {
         <Link as="/" href="/">
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 hover:text-blue-700">
             <img
+              loading="lazy"
+              decoding="async"
               src="/assets/avatar.png"
               className="w-12 h-12 rounded-full"
               alt="Logo"
